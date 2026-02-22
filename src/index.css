@@ -32,7 +32,7 @@
 }
 
 .sidebar {
-  width: 240px;
+  width: 160px;
   min-height: 100vh;
   padding: 1.5rem 1rem;
   border-right: 1px solid #e5e7eb;
@@ -73,7 +73,7 @@
 
 .content {
   flex: 1;
-  padding: 2rem 3rem;
+  padding: 1rem 1.5rem;
 }
 
 /* markdown 본문 스타일 */

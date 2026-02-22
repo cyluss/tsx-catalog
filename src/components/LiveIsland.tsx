@@ -23,7 +23,7 @@ function EditorSync({ islandId, iframeRef, readyRef }: {
   }, [code]) // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <LiveEditor
-      style={{ fontFamily: 'ui-monospace, monospace', fontSize: '13px', lineHeight: 1.6, flex: 1 }}
+      style={{ fontFamily: 'ui-monospace, monospace', fontSize: '11px', lineHeight: 1.6, flex: 1 }}
     />
   )
 }

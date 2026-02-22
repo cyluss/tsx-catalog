@@ -57,7 +57,7 @@ export default function App() {
       <main className="content">
         {current && (
           <>
-            <h2 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '1.5rem' }}>
+            <h2 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '0.75rem' }}>
               {current.name}
             </h2>
             <LiveIsland

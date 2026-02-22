@@ -53,7 +53,7 @@ export default function PreviewApp() {
   return (
     <div ref={ref}>
       <LiveProvider code={code} scope={scope} noInline={false}>
-        <div style={{ padding: '1.5rem' }}>
+        <div style={{ padding: '1rem' }}>
           <LivePreview />
         </div>
         <LiveError style={{ padding: '0.5rem 1.5rem', color: '#dc2626', fontSize: '13px' }} />
