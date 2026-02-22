@@ -15,6 +15,10 @@
     font-family: system-ui, sans-serif;
     color-scheme: light dark;
   }
+
+  textarea, input, button, select {
+    font: inherit;
+  }
 }
 
 @theme inline {

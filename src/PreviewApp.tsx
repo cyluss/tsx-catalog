@@ -37,21 +37,26 @@ export default function PreviewApp() {
   useEffect(() => {
     if (!ref.current) return
     const islandId = new URLSearchParams(location.search).get('islandId') ?? ''
-    const ro = new ResizeObserver((entries) => {
-      const height = Math.ceil(entries[0].borderBoxSize?.[0]?.blockSize ?? entries[0].target.scrollHeight)
+    const el = ref.current
+    const sendHeight = () => {
+      const height = Math.ceil(el.getBoundingClientRect().height)
       window.parent.postMessage({ type: 'height', islandId, height }, '*')
-    })
-    ro.observe(ref.current)
-    return () => ro.disconnect()
+    }
+    const ro = new ResizeObserver(sendHeight)
+    ro.observe(el)
+    window.addEventListener('resize', sendHeight)
+    return () => { ro.disconnect(); window.removeEventListener('resize', sendHeight) }
   }, [code])
 
   if (!code) return null
 
   return (
-    <div ref={ref} style={{ padding: '1.5rem', display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'flex-start' }}>
+    <div ref={ref}>
       <LiveProvider code={code} scope={scope} noInline={false}>
-        <LivePreview />
-        <LiveError />
+        <div style={{ padding: '1.5rem' }}>
+          <LivePreview />
+        </div>
+        <LiveError style={{ padding: '0.5rem 1.5rem', color: '#dc2626', fontSize: '13px' }} />
       </LiveProvider>
     </div>
   )

@@ -60,28 +60,20 @@ export default function App() {
             <h2 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '1.5rem' }}>
               {current.name}
             </h2>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
-              <div>
-                <div className="live-title">Bootstrap</div>
-                <LiveIsland
-                  key={`bs-${current.name}`}
-                  id={`bs-${current.name}`}
-                  code={current.bootstrapCode}
-                  title=""
-                  theme="bootstrap"
-                />
-              </div>
-              <div>
-                <div className="live-title">shadcn/ui</div>
-                <LiveIsland
-                  key={`shadcn-${current.name}`}
-                  id={`shadcn-${current.name}`}
-                  code={current.shadcnCode}
-                  title=""
-                  theme="shadcn"
-                />
-              </div>
-            </div>
+            <LiveIsland
+              key={`bs-${current.name}`}
+              id={`bs-${current.name}`}
+              code={current.bootstrapCode}
+              title="Bootstrap"
+              theme="bootstrap"
+            />
+            <LiveIsland
+              key={`shadcn-${current.name}`}
+              id={`shadcn-${current.name}`}
+              code={current.shadcnCode}
+              title="shadcn/ui"
+              theme="shadcn"
+            />
           </>
         )}
         {components.length === 0 && <div className="loading">로딩 중...</div>}

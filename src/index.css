@@ -74,7 +74,6 @@
 .content {
   flex: 1;
   padding: 2rem 3rem;
-  max-width: 800px;
 }
 
 /* markdown 본문 스타일 */
