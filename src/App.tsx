@@ -75,11 +75,11 @@ export default function App() {
       <main className="content">
         {current && (
           <>
-            <h2 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '0.75rem' }}>
+            <h2 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: '0.75rem' }}>
               {current.name}
             </h2>
             {current.designHtml && (
-              <div className="design-body" dangerouslySetInnerHTML={{ __html: current.designHtml }} style={{ marginBottom: '1rem' }} />
+              <div className="design-body" dangerouslySetInnerHTML={{ __html: current.designHtml }} style={{ marginBottom: '2rem' }} />
             )}
             <LiveIsland
               key={`bs-${current.name}`}
