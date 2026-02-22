@@ -79,7 +79,7 @@ export default function App() {
               {current.name}
             </h2>
             {current.designHtml && (
-              <div className="markdown-body" dangerouslySetInnerHTML={{ __html: current.designHtml }} style={{ marginBottom: '1rem' }} />
+              <div className="design-body" dangerouslySetInnerHTML={{ __html: current.designHtml }} style={{ marginBottom: '1rem' }} />
             )}
             <LiveIsland
               key={`bs-${current.name}`}
