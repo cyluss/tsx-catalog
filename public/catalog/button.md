@@ -1,26 +1,5 @@
 # Button
 
-## Bootstrap
+사용 시점: 사용자 액션을 트리거하는 모든 인터랙티브 요소에 사용한다. div나 span에 onClick을 붙이는 방식은 사용하지 않는다. 접근성과 키보드 탐색이 자동으로 보장된다.
 
-```jsx live
-<div style={{display:'flex', gap:'8px', flexWrap:'wrap'}}>
-  <RB.Button variant="primary">Primary</RB.Button>
-  <RB.Button variant="secondary">Secondary</RB.Button>
-  <RB.Button variant="danger">Danger</RB.Button>
-  <RB.Button variant="outline-primary">Outline</RB.Button>
-  <RB.Button variant="primary" disabled>Disabled</RB.Button>
-</div>
-```
-
-## shadcn
-
-```jsx live
-<div style={{display:'flex', gap:'8px', flexWrap:'wrap'}}>
-  <Shad.Button>Default</Shad.Button>
-  <Shad.Button variant="secondary">Secondary</Shad.Button>
-  <Shad.Button variant="destructive">Destructive</Shad.Button>
-  <Shad.Button variant="outline">Outline</Shad.Button>
-  <Shad.Button variant="ghost">Ghost</Shad.Button>
-  <Shad.Button disabled>Disabled</Shad.Button>
-</div>
-```
+선택 규칙: 한 화면에 variant="primary"는 하나만 사용한다. 주요 액션이 무엇인지 이슈의 성공 조건에서 판단한다.

@@ -4,20 +4,38 @@ import { LiveIsland } from './components/LiveIsland'
 
 type ComponentEntry = {
   name: string
+  designHtml: string
   bootstrapCode: string
   shadcnCode: string
 }
 
-async function loadComponent(slug: string): Promise<ComponentEntry> {
-  const md = await fetch(`/catalog/${slug}.md`).then((r) => r.text())
+async function fetchFirstIsland(url: string): Promise<string> {
+  const res = await fetch(url)
+  if (!res.ok) return ''
+  const md = await res.text()
   const { units } = await parseMarkdown(md)
-  const islands = units.filter((u) => u.type === 'island')
-  const bootstrap = islands.find((u) => u.title === 'Bootstrap')
-  const shadcn = islands.find((u) => u.title === 'shadcn')
+  return units.find((u) => u.type === 'island')?.code ?? ''
+}
+
+async function fetchDesignHtml(slug: string): Promise<string> {
+  const res = await fetch(`/catalog/${slug}.md`)
+  if (!res.ok) return ''
+  const md = await res.text()
+  const { units } = await parseMarkdown(md)
+  return units.filter((u) => u.type === 'html').map((u) => (u as { html: string }).html).join('')
+}
+
+async function loadComponent(slug: string): Promise<ComponentEntry> {
+  const [designHtml, bootstrapCode, shadcnCode] = await Promise.all([
+    fetchDesignHtml(slug),
+    fetchFirstIsland(`/catalog/${slug}-rb.md`),
+    fetchFirstIsland(`/catalog/${slug}-shadcn.md`),
+  ])
   return {
     name: slug.charAt(0).toUpperCase() + slug.slice(1),
-    bootstrapCode: bootstrap?.code ?? '',
-    shadcnCode: shadcn?.code ?? '',
+    designHtml,
+    bootstrapCode,
+    shadcnCode,
   }
 }
 
@@ -60,6 +78,9 @@ export default function App() {
             <h2 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '0.75rem' }}>
               {current.name}
             </h2>
+            {current.designHtml && (
+              <div className="markdown-body" dangerouslySetInnerHTML={{ __html: current.designHtml }} style={{ marginBottom: '1rem' }} />
+            )}
             <LiveIsland
               key={`bs-${current.name}`}
               id={`bs-${current.name}`}

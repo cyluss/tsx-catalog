@@ -1,27 +1,5 @@
 # Alert
 
-## Bootstrap
+사용 시점: 시스템 메시지, API 에러 응답, 폼 유효성 검사 결과를 사용자에게 알릴 때 사용한다. 인라인으로 페이지 내에 표시한다. 일시적인 알림은 Toast를 사용한다.
 
-```jsx live
-<div style={{display:'flex', flexDirection:'column', gap:'8px'}}>
-  <RB.Alert variant="danger">서버 오류가 발생했습니다.</RB.Alert>
-  <RB.Alert variant="success">저장되었습니다.</RB.Alert>
-  <RB.Alert variant="warning">저장 공간이 부족합니다.</RB.Alert>
-  <RB.Alert variant="info">이 설정은 다음 로그인부터 적용됩니다.</RB.Alert>
-</div>
-```
-
-## shadcn
-
-```jsx live
-<div style={{display:'flex', flexDirection:'column', gap:'12px'}}>
-  <Shad.Alert>
-    <Shad.AlertTitle>안내</Shad.AlertTitle>
-    <Shad.AlertDescription>이 설정은 다음 로그인부터 적용됩니다.</Shad.AlertDescription>
-  </Shad.Alert>
-  <Shad.Alert variant="destructive">
-    <Shad.AlertTitle>오류</Shad.AlertTitle>
-    <Shad.AlertDescription>서버 오류가 발생했습니다.</Shad.AlertDescription>
-  </Shad.Alert>
-</div>
-```
+선택 규칙: API 에러는 항상 variant="danger"를 사용한다. 에러 메시지는 error.message를 그대로 표시한다. 에러 문구를 에이전트가 임의로 만들지 않는다.
