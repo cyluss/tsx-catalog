@@ -6,6 +6,7 @@ interface Props {
   id: string
   title: string
   theme: 'bootstrap' | 'shadcn'
+  noInline?: boolean
   minHeight?: number
 }
 
@@ -29,7 +30,7 @@ function EditorSync({ islandId, iframeRef, readyRef }: {
   )
 }
 
-export function LiveIsland({ code, id, title, theme, minHeight = 120 }: Props) {
+export function LiveIsland({ code, id, title, theme, noInline = false, minHeight = 120 }: Props) {
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const [height, setHeight] = useState(minHeight)
   const readyRef = useRef(false)
@@ -56,7 +57,7 @@ export function LiveIsland({ code, id, title, theme, minHeight = 120 }: Props) {
       {title && <div className="live-title">{title}</div>}
       <div style={{ display: 'flex', alignItems: 'flex-start', border: '1px solid #e5e7eb', borderRadius: '8px', overflow: 'hidden' }}>
         <div style={{ flex: 1, borderRight: '1px solid #e5e7eb', minHeight: `${height}px`, background: 'rgb(1, 22, 39)' }}>
-          <LiveProvider key={id} code={code} noInline={false}>
+          <LiveProvider key={id} code={code} noInline={noInline}>
             <EditorSync islandId={id} iframeRef={iframeRef} readyRef={readyRef} />
           </LiveProvider>
         </div>

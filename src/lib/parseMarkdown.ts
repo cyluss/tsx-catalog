@@ -8,7 +8,7 @@ import { visit } from 'unist-util-visit'
 import type { Root, Code, Heading, RootContent } from 'mdast'
 
 export type RenderUnit =
-  | { type: 'island'; code: string; id: string; title: string }
+  | { type: 'island'; code: string; id: string; title: string; noInline: boolean }
   | { type: 'html'; html: string }
 
 export interface NavItem {
@@ -68,17 +68,17 @@ export async function parseMarkdown(markdown: string): Promise<ParseResult> {
   }
 
   for (const node of tree.children) {
-    if (
-      node.type === 'code' &&
-      (node as Code).lang === 'jsx' &&
-      (node as Code).meta === 'live'
-    ) {
+    const codeNode = node as Code
+    const isJsxLive = node.type === 'code' && codeNode.lang === 'jsx' && codeNode.meta === 'live'
+    const isTsxIsland = node.type === 'code' && (codeNode.lang === 'tsx' || codeNode.lang === 'jsx') && codeNode.meta === 'island'
+    if (isJsxLive || isTsxIsland) {
       await flushHtml()
       units.push({
         type: 'island',
-        code: (node as Code).value,
+        code: codeNode.value,
         id: `island-${islandIndex++}`,
         title: lastHeading,
+        noInline: isTsxIsland,
       })
     } else {
       // 헤딩 텍스트 추적 (island title용)

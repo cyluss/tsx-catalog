@@ -6,19 +6,25 @@ type ComponentEntry = {
   slug: string
   name: string
   designHtml: string
-  bootstrapCodes: string[]
-  shadcnCodes: string[]
+  bootstrapCodes: IslandEntry[]
+  shadcnCodes: IslandEntry[]
+  tailwindCodes: IslandEntry[]
+  bootstrapUtilCodes: IslandEntry[]
   minHeight?: number
 }
 
 const BASE = import.meta.env.BASE_URL
 
-async function fetchAllIslands(url: string): Promise<string[]> {
+type IslandEntry = { code: string; noInline: boolean }
+
+async function fetchAllIslands(url: string): Promise<IslandEntry[]> {
   const res = await fetch(url)
   if (!res.ok) return []
   const md = await res.text()
   const { units } = await parseMarkdown(md)
-  return units.filter((u) => u.type === 'island').map((u) => u.code)
+  return units
+    .filter((u) => u.type === 'island')
+    .map((u) => ({ code: u.code, noInline: (u as { noInline: boolean }).noInline }))
 }
 
 async function fetchDesignHtml(slug: string): Promise<string> {
@@ -36,10 +42,12 @@ const MIN_HEIGHTS: Record<string, number> = {
 }
 
 async function loadComponent(slug: string): Promise<ComponentEntry> {
-  const [designHtml, bootstrapCodes, shadcnCodes] = await Promise.all([
+  const [designHtml, bootstrapCodes, shadcnCodes, tailwindCodes, bootstrapUtilCodes] = await Promise.all([
     fetchDesignHtml(slug),
     fetchAllIslands(`${BASE}catalog/${slug}-rb.md`),
     fetchAllIslands(`${BASE}catalog/${slug}-shadcn.md`),
+    fetchAllIslands(`${BASE}catalog/${slug}-tw.md`),
+    fetchAllIslands(`${BASE}catalog/${slug}-bs.md`),
   ])
   return {
     slug,
@@ -47,6 +55,8 @@ async function loadComponent(slug: string): Promise<ComponentEntry> {
     designHtml,
     bootstrapCodes,
     shadcnCodes,
+    tailwindCodes,
+    bootstrapUtilCodes,
     minHeight: MIN_HEIGHTS[slug],
   }
 }
@@ -77,6 +87,8 @@ export default function App() {
   const [examples, setExamples] = useState<ComponentEntry[]>([])
   const [selected, setSelected] = useState<string>(getHash)
   const [homeHtml, setHomeHtml] = useState<string>('')
+  const [bsTab, setBsTab] = useState<'rb' | 'bs'>('rb')
+  const [twTab, setTwTab] = useState<'shadcn' | 'tw'>('shadcn')
 
   useEffect(() => {
     fetchDesignHtml('home').then(setHomeHtml)
@@ -119,6 +131,12 @@ export default function App() {
   const current = [...components, ...examples].find((c) => c.slug === selected)
   const isLoading = components.length === 0 && examples.length === 0
 
+  // 컴포넌트 변경 시 탭 초기화
+  useEffect(() => {
+    setBsTab('rb')
+    setTwTab('shadcn')
+  }, [selected])
+
   return (
     <div style={{ display: 'flex', minHeight: '100vh' }}>
       <nav className="sidebar">
@@ -138,26 +156,62 @@ export default function App() {
             {current.designHtml && (
               <div className="design-body" dangerouslySetInnerHTML={{ __html: current.designHtml }} style={{ marginBottom: '2rem' }} />
             )}
-            {current.bootstrapCodes.map((code, i) => (
-              <LiveIsland
-                key={`bs-${current.slug}-${i}`}
-                id={`bs-${current.slug}-${i}`}
-                code={code}
-                title={i === 0 ? 'Bootstrap' : ''}
-                theme="bootstrap"
-                minHeight={current.minHeight}
-              />
-            ))}
-            {current.shadcnCodes.map((code, i) => (
-              <LiveIsland
-                key={`shadcn-${current.slug}-${i}`}
-                id={`shadcn-${current.slug}-${i}`}
-                code={code}
-                title={i === 0 ? 'shadcn/ui' : ''}
-                theme="shadcn"
-                minHeight={current.minHeight}
-              />
-            ))}
+            {/* Bootstrap 그룹 */}
+            {(current.bootstrapCodes.length > 0 || current.bootstrapUtilCodes.length > 0) && (() => {
+              const hasBoth = current.bootstrapCodes.length > 0 && current.bootstrapUtilCodes.length > 0
+              const activeTab = hasBoth ? bsTab : (current.bootstrapCodes.length > 0 ? 'rb' : 'bs')
+              const islands = activeTab === 'rb' ? current.bootstrapCodes : current.bootstrapUtilCodes
+              const tabLabel = activeTab === 'rb' ? 'Bootstrap' : 'Bootstrap Utilities'
+              return (
+                <>
+                  {hasBoth && (
+                    <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                      <button className={`tab-btn ${bsTab === 'rb' ? 'active' : ''}`} onClick={() => setBsTab('rb')}>Bootstrap</button>
+                      <button className={`tab-btn ${bsTab === 'bs' ? 'active' : ''}`} onClick={() => setBsTab('bs')}>Bootstrap Utilities</button>
+                    </div>
+                  )}
+                  {islands.map(({ code, noInline }, i) => (
+                    <LiveIsland
+                      key={`bs-${activeTab}-${current.slug}-${i}`}
+                      id={`bs-${activeTab}-${current.slug}-${i}`}
+                      code={code}
+                      noInline={noInline}
+                      title={i === 0 ? tabLabel : ''}
+                      theme="bootstrap"
+                      minHeight={current.minHeight}
+                    />
+                  ))}
+                </>
+              )
+            })()}
+            {/* shadcn / Tailwind 그룹 */}
+            {(current.shadcnCodes.length > 0 || current.tailwindCodes.length > 0) && (() => {
+              const hasBoth = current.shadcnCodes.length > 0 && current.tailwindCodes.length > 0
+              const activeTab = hasBoth ? twTab : (current.shadcnCodes.length > 0 ? 'shadcn' : 'tw')
+              const islands = activeTab === 'shadcn' ? current.shadcnCodes : current.tailwindCodes
+              const tabLabel = activeTab === 'shadcn' ? 'shadcn/ui' : 'Tailwind'
+              return (
+                <>
+                  {hasBoth && (
+                    <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                      <button className={`tab-btn ${twTab === 'shadcn' ? 'active' : ''}`} onClick={() => setTwTab('shadcn')}>shadcn/ui</button>
+                      <button className={`tab-btn ${twTab === 'tw' ? 'active' : ''}`} onClick={() => setTwTab('tw')}>Tailwind</button>
+                    </div>
+                  )}
+                  {islands.map(({ code, noInline }, i) => (
+                    <LiveIsland
+                      key={`tw-${activeTab}-${current.slug}-${i}`}
+                      id={`tw-${activeTab}-${current.slug}-${i}`}
+                      code={code}
+                      noInline={noInline}
+                      title={i === 0 ? tabLabel : ''}
+                      theme="shadcn"
+                      minHeight={current.minHeight}
+                    />
+                  ))}
+                </>
+              )
+            })()}
           </>
         )}
         {isLoading && <div className="loading">로딩 중...</div>}
