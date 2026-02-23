@@ -43,7 +43,7 @@ async function loadComponent(slug: string): Promise<ComponentEntry> {
   ])
   return {
     slug,
-    name: slug.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
+    name: slug.replace(/^example-/, '').split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
     designHtml,
     bootstrapCodes,
     shadcnCodes,
@@ -55,8 +55,26 @@ function getHash() {
   return decodeURIComponent(location.hash.slice(1))
 }
 
+function SidebarGroup({ label, entries, selected }: { label: string; entries: ComponentEntry[]; selected: string }) {
+  return (
+    <>
+      <p className="sidebar-group-label">{label}</p>
+      <ul>
+        {entries.map((c) => (
+          <li key={c.slug}>
+            <a href={`#${c.slug}`} className={selected === c.slug ? 'active' : ''}>
+              {c.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </>
+  )
+}
+
 export default function App() {
   const [components, setComponents] = useState<ComponentEntry[]>([])
+  const [examples, setExamples] = useState<ComponentEntry[]>([])
   const [selected, setSelected] = useState<string>(getHash)
   const [homeHtml, setHomeHtml] = useState<string>('')
 
@@ -67,11 +85,17 @@ export default function App() {
   useEffect(() => {
     fetch(`${BASE}catalog/index.json`)
       .then((r) => r.json())
-      .then((slugs: string[]) => Promise.all(slugs.map(loadComponent)))
-      .then((entries) => {
-        setComponents(entries)
+      .then((index: { components: string[]; examples: string[] }) =>
+        Promise.all([
+          Promise.all(index.components.map(loadComponent)),
+          Promise.all(index.examples.map(loadComponent)),
+        ])
+      )
+      .then(([comps, exs]) => {
+        setComponents(comps)
+        setExamples(exs)
         const hash = getHash()
-        const match = entries.find((e) => e.slug === hash)
+        const match = [...comps, ...exs].find((e) => e.slug === hash)
         setSelected(match ? match.slug : '')
       })
   }, [])
@@ -79,34 +103,28 @@ export default function App() {
   useEffect(() => {
     const onHashChange = () => {
       const hash = getHash()
-      setComponents((prev) => {
-        const match = prev.find((e) => e.slug === hash)
-        setSelected(match ? match.slug : '')
-        return prev
+      setComponents((comps) => {
+        setExamples((exs) => {
+          const match = [...comps, ...exs].find((e) => e.slug === hash)
+          setSelected(match ? match.slug : '')
+          return exs
+        })
+        return comps
       })
     }
     window.addEventListener('hashchange', onHashChange)
     return () => window.removeEventListener('hashchange', onHashChange)
   }, [])
 
-  const current = components.find((c) => c.slug === selected)
+  const current = [...components, ...examples].find((c) => c.slug === selected)
+  const isLoading = components.length === 0 && examples.length === 0
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh' }}>
       <nav className="sidebar">
         <a href="#" className={selected === '' ? 'sidebar-home active' : 'sidebar-home'}>홈</a>
-        <ul>
-          {components.map((c) => (
-            <li key={c.slug}>
-              <a
-                href={`#${c.slug}`}
-                className={selected === c.slug ? 'active' : ''}
-              >
-                {c.name}
-              </a>
-            </li>
-          ))}
-        </ul>
+        {components.length > 0 && <SidebarGroup label="컴포넌트" entries={components} selected={selected} />}
+        {examples.length > 0 && <SidebarGroup label="예제" entries={examples} selected={selected} />}
       </nav>
       <main className="content">
         {selected === '' && homeHtml && (
@@ -122,8 +140,8 @@ export default function App() {
             )}
             {current.bootstrapCodes.map((code, i) => (
               <LiveIsland
-                key={`bs-${current.name}-${i}`}
-                id={`bs-${current.name}-${i}`}
+                key={`bs-${current.slug}-${i}`}
+                id={`bs-${current.slug}-${i}`}
                 code={code}
                 title={i === 0 ? 'Bootstrap' : ''}
                 theme="bootstrap"
@@ -132,8 +150,8 @@ export default function App() {
             ))}
             {current.shadcnCodes.map((code, i) => (
               <LiveIsland
-                key={`shadcn-${current.name}-${i}`}
-                id={`shadcn-${current.name}-${i}`}
+                key={`shadcn-${current.slug}-${i}`}
+                id={`shadcn-${current.slug}-${i}`}
                 code={code}
                 title={i === 0 ? 'shadcn/ui' : ''}
                 theme="shadcn"
@@ -142,7 +160,7 @@ export default function App() {
             ))}
           </>
         )}
-        {components.length === 0 && <div className="loading">로딩 중...</div>}
+        {isLoading && <div className="loading">로딩 중...</div>}
       </main>
     </div>
   )
