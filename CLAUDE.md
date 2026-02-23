@@ -1,5 +1,10 @@
 # tsx-catalog
 
+## 메타
+
+- GitHub: `cyluss/tsx-catalog`
+- GitHub Pages: `https://cyluss.github.io/tsx-catalog/`
+
 ## 역할
 
 이 저장소는 UI 컴포넌트 카탈로그 뷰어다. 컴포넌트를 구현하는 곳이 아니다.

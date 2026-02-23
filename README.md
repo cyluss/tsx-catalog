@@ -65,6 +65,7 @@ src/
 | `RB` | react-bootstrap 전체 |
 | `Shad` | shadcn/ui 컴포넌트 (Button, Badge, Alert, Card 등) |
 | `Button`, `Alert`, `Badge`, `Spinner` | 공통 스텁 |
+| `useScrollSpy` | 커스텀 scroll spy 훅 (IntersectionObserver 기반) |
 
 ## 빌드
 
