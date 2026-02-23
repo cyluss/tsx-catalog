@@ -62,7 +62,7 @@ export function LiveIsland({ code, id, title, theme, minHeight = 120 }: Props) {
         </div>
         <iframe
           ref={iframeRef}
-          src={`/preview-${theme}.html?islandId=${id}`}
+          src={`${import.meta.env.BASE_URL}preview-${theme}.html?islandId=${id}`}
           style={{ flex: 1, border: 'none', display: 'block', height: `${height}px` }}
         />
       </div>

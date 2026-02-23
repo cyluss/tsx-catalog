@@ -11,6 +11,8 @@ type ComponentEntry = {
   minHeight?: number
 }
 
+const BASE = import.meta.env.BASE_URL
+
 async function fetchAllIslands(url: string): Promise<string[]> {
   const res = await fetch(url)
   if (!res.ok) return []
@@ -20,7 +22,7 @@ async function fetchAllIslands(url: string): Promise<string[]> {
 }
 
 async function fetchDesignHtml(slug: string): Promise<string> {
-  const res = await fetch(`/catalog/${slug}.md`)
+  const res = await fetch(`${BASE}catalog/${slug}.md`)
   if (!res.ok) return ''
   const md = await res.text()
   const { units } = await parseMarkdown(md)
@@ -36,8 +38,8 @@ const MIN_HEIGHTS: Record<string, number> = {
 async function loadComponent(slug: string): Promise<ComponentEntry> {
   const [designHtml, bootstrapCodes, shadcnCodes] = await Promise.all([
     fetchDesignHtml(slug),
-    fetchAllIslands(`/catalog/${slug}-rb.md`),
-    fetchAllIslands(`/catalog/${slug}-shadcn.md`),
+    fetchAllIslands(`${BASE}catalog/${slug}-rb.md`),
+    fetchAllIslands(`${BASE}catalog/${slug}-shadcn.md`),
   ])
   return {
     slug,
@@ -63,7 +65,7 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    fetch('/catalog/index.json')
+    fetch(`${BASE}catalog/index.json`)
       .then((r) => r.json())
       .then((slugs: string[]) => Promise.all(slugs.map(loadComponent)))
       .then((entries) => {
