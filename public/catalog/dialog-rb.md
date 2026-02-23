@@ -1,0 +1,26 @@
+# Dialog — Bootstrap
+
+```jsx live
+function DialogExample() {
+  const [show, setShow] = React.useState(false)
+  return (
+    <>
+      <RB.Button variant="primary" onClick={() => setShow(true)}>
+        계정 삭제
+      </RB.Button>
+      <RB.Modal show={show} onHide={() => setShow(false)} centered>
+        <RB.Modal.Header closeButton>
+          <RB.Modal.Title>계정을 삭제하시겠습니까?</RB.Modal.Title>
+        </RB.Modal.Header>
+        <RB.Modal.Body>
+          이 작업은 되돌릴 수 없습니다. 계정과 모든 데이터가 영구적으로 삭제됩니다.
+        </RB.Modal.Body>
+        <RB.Modal.Footer>
+          <RB.Button variant="outline-secondary" onClick={() => setShow(false)}>취소</RB.Button>
+          <RB.Button variant="danger" onClick={() => setShow(false)}>삭제</RB.Button>
+        </RB.Modal.Footer>
+      </RB.Modal>
+    </>
+  )
+}
+```

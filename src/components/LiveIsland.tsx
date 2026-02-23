@@ -6,6 +6,7 @@ interface Props {
   id: string
   title: string
   theme: 'bootstrap' | 'shadcn'
+  minHeight?: number
 }
 
 function EditorSync({ islandId, iframeRef, readyRef }: {
@@ -28,9 +29,9 @@ function EditorSync({ islandId, iframeRef, readyRef }: {
   )
 }
 
-export function LiveIsland({ code, id, title, theme }: Props) {
+export function LiveIsland({ code, id, title, theme, minHeight = 120 }: Props) {
   const iframeRef = useRef<HTMLIFrameElement>(null)
-  const [height, setHeight] = useState(120)
+  const [height, setHeight] = useState(minHeight)
   const readyRef = useRef(false)
 
   useEffect(() => {
@@ -43,7 +44,7 @@ export function LiveIsland({ code, id, title, theme }: Props) {
         iframe.contentWindow?.postMessage({ type: 'code', islandId: id, code: iframe.dataset.code }, '*')
       }
       if (e.data?.type === 'height') {
-        setHeight(e.data.height)
+        setHeight((prev) => Math.max(prev, e.data.height))
       }
     }
     window.addEventListener('message', onMessage)

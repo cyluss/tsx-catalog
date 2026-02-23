@@ -17,6 +17,7 @@ import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import { FieldContent, FieldTitle } from '@/components/ui/field'
 import { ButtonGroup, ButtonGroupSeparator, ButtonGroupText } from '@/components/ui/button-group'
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from '@/components/ui/dialog'
 
 const Shad = {
   Button: ShadButton, Badge: ShadBadge,
@@ -28,6 +29,7 @@ const Shad = {
   Checkbox, RadioGroup, RadioGroupItem, Label,
   Switch,
   ButtonGroup, ButtonGroupSeparator, ButtonGroupText,
+  Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose,
 }
 
 const scope = {

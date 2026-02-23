@@ -7,6 +7,7 @@ type ComponentEntry = {
   designHtml: string
   bootstrapCode: string
   shadcnCode: string
+  minHeight?: number
 }
 
 async function fetchFirstIsland(url: string): Promise<string> {
@@ -25,6 +26,10 @@ async function fetchDesignHtml(slug: string): Promise<string> {
   return units.filter((u) => u.type === 'html').map((u) => (u as { html: string }).html).join('')
 }
 
+const MIN_HEIGHTS: Record<string, number> = {
+  dialog: 400,
+}
+
 async function loadComponent(slug: string): Promise<ComponentEntry> {
   const [designHtml, bootstrapCode, shadcnCode] = await Promise.all([
     fetchDesignHtml(slug),
@@ -36,6 +41,7 @@ async function loadComponent(slug: string): Promise<ComponentEntry> {
     designHtml,
     bootstrapCode,
     shadcnCode,
+    minHeight: MIN_HEIGHTS[slug],
   }
 }
 
@@ -105,6 +111,7 @@ export default function App() {
               code={current.bootstrapCode}
               title="Bootstrap"
               theme="bootstrap"
+              minHeight={current.minHeight}
             />
             <LiveIsland
               key={`shadcn-${current.name}`}
@@ -112,6 +119,7 @@ export default function App() {
               code={current.shadcnCode}
               title="shadcn/ui"
               theme="shadcn"
+              minHeight={current.minHeight}
             />
           </>
         )}
