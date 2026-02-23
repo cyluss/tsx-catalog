@@ -54,6 +54,11 @@ function getHash() {
 export default function App() {
   const [components, setComponents] = useState<ComponentEntry[]>([])
   const [selected, setSelected] = useState<string>(getHash)
+  const [homeHtml, setHomeHtml] = useState<string>('')
+
+  useEffect(() => {
+    fetchDesignHtml('home').then(setHomeHtml)
+  }, [])
 
   useEffect(() => {
     fetch('/catalog/index.json')
@@ -100,52 +105,8 @@ export default function App() {
         </ul>
       </nav>
       <main className="content">
-        {selected === '' && components.length > 0 && (
-          <>
-            <div className="toc-grid" style={{ marginBottom: '3rem' }}>
-              {components.map((c) => (
-                <a
-                  key={c.name}
-                  className="toc-card"
-                  href={`#section-${c.name.toLowerCase()}`}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    document.getElementById(`section-${c.name.toLowerCase()}`)?.scrollIntoView({ behavior: 'smooth' })
-                  }}
-                >
-                  {c.name}
-                </a>
-              ))}
-            </div>
-            {components.map((c) => (
-              <section key={c.name} id={`section-${c.name.toLowerCase()}`} style={{ marginBottom: '4rem' }}>
-                <h2 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: '0.75rem' }}>{c.name}</h2>
-                {c.designHtml && (
-                  <div className="design-body" dangerouslySetInnerHTML={{ __html: c.designHtml }} style={{ marginBottom: '2rem' }} />
-                )}
-                {c.bootstrapCodes.map((code, i) => (
-                  <LiveIsland
-                    key={`bs-${c.name}-${i}`}
-                    id={`bs-${c.name}-${i}`}
-                    code={code}
-                    title={i === 0 ? 'Bootstrap' : ''}
-                    theme="bootstrap"
-                    minHeight={c.minHeight}
-                  />
-                ))}
-                {c.shadcnCodes.map((code, i) => (
-                  <LiveIsland
-                    key={`shadcn-${c.name}-${i}`}
-                    id={`shadcn-${c.name}-${i}`}
-                    code={code}
-                    title={i === 0 ? 'shadcn/ui' : ''}
-                    theme="shadcn"
-                    minHeight={c.minHeight}
-                  />
-                ))}
-              </section>
-            ))}
-          </>
+        {selected === '' && homeHtml && (
+          <div className="markdown-body" dangerouslySetInnerHTML={{ __html: homeHtml }} />
         )}
         {current && (
           <>
