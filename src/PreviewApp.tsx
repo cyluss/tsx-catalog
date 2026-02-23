@@ -18,6 +18,7 @@ import { Switch } from '@/components/ui/switch'
 import { FieldContent, FieldTitle } from '@/components/ui/field'
 import { ButtonGroup, ButtonGroupSeparator, ButtonGroupText } from '@/components/ui/button-group'
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from '@/components/ui/dialog'
+import { Popover, PopoverTrigger, PopoverContent, PopoverHeader, PopoverTitle, PopoverDescription } from '@/components/ui/popover'
 
 const Shad = {
   Button: ShadButton, Badge: ShadBadge,
@@ -30,6 +31,7 @@ const Shad = {
   Switch,
   ButtonGroup, ButtonGroupSeparator, ButtonGroupText,
   Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose,
+  Popover, PopoverTrigger, PopoverContent, PopoverHeader, PopoverTitle, PopoverDescription,
 }
 
 const scope = {
