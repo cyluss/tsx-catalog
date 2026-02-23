@@ -11,7 +11,7 @@ interface Props {
 
 function EditorSync({ islandId, iframeRef, readyRef }: {
   islandId: string
-  iframeRef: React.RefObject<HTMLIFrameElement>
+  iframeRef: React.RefObject<HTMLIFrameElement | null>
   readyRef: React.RefObject<boolean>
 }) {
   const { code } = useContext(LiveContext)
