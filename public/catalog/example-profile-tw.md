@@ -38,7 +38,7 @@ function ProfileForm() {
       </div>
 
       {active === 'profile' && (
-        <div className="pt-3" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <div className="pt-5" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', animationDuration: '0s' }}>
           {error && (
             <div className="flex items-center gap-2 rounded-md border border-destructive/50 bg-destructive/10 px-3 py-2 text-sm text-destructive">
               {error}
@@ -67,7 +67,7 @@ function ProfileForm() {
       )}
 
       {active === 'notifications' && (
-        <div className="pt-3" style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+        <div className="pt-5" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', animationDuration: '0s' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
               <p className="text-sm font-medium">이메일 알림</p>
