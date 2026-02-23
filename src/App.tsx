@@ -32,7 +32,7 @@ async function loadComponent(slug: string): Promise<ComponentEntry> {
     fetchFirstIsland(`/catalog/${slug}-shadcn.md`),
   ])
   return {
-    name: slug.charAt(0).toUpperCase() + slug.slice(1),
+    name: slug.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
     designHtml,
     bootstrapCode,
     shadcnCode,

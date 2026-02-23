@@ -16,6 +16,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import { FieldContent, FieldTitle } from '@/components/ui/field'
+import { ButtonGroup, ButtonGroupSeparator, ButtonGroupText } from '@/components/ui/button-group'
 
 const Shad = {
   Button: ShadButton, Badge: ShadBadge,
@@ -26,6 +27,7 @@ const Shad = {
   Select, SelectTrigger, SelectValue, SelectContent, SelectItem,
   Checkbox, RadioGroup, RadioGroupItem, Label,
   Switch,
+  ButtonGroup, ButtonGroupSeparator, ButtonGroupText,
 }
 
 const scope = {
