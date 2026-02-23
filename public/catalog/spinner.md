@@ -6,13 +6,13 @@
   <dt>대안 검토</dt>
   <dd>
     <table>
-      <thead><tr><th>패턴</th><th>특징</th><th>적합한 경우</th></tr></thead>
+      <thead><tr><th>패턴</th><th>특징</th><th>이전 상태 유지</th><th>적합한 경우</th></tr></thead>
       <tbody>
-        <tr><td>Skeleton</td><td>레이아웃을 유지하며 로딩 표시</td><td>목록·카드 초기 로딩</td></tr>
-        <tr><td>Optimistic UI</td><td>성공 가정 후 실패 시 롤백</td><td>좋아요·체크박스 등 즉각 반응</td></tr>
-        <tr><td>인라인 Progress bar</td><td>페이지 상단 얇은 바</td><td>페이지 전환·라우팅</td></tr>
-        <tr><td>버튼 disabled + 텍스트</td><td>Spinner 없이 상태만 표시</td><td>폼 제출 단순 케이스</td></tr>
-        <tr><td>Spinner</td><td>명시적이나 콘텐츠 영역 점유</td><td>대안이 불가능한 경우</td></tr>
+        <tr><td>Skeleton</td><td>레이아웃을 유지하며 로딩 표시</td><td>✓ 형태 유지</td><td>목록·카드 초기 로딩</td></tr>
+        <tr><td>Optimistic UI</td><td>성공 가정 후 실패 시 롤백</td><td>✓ 즉시 반영</td><td>좋아요·체크박스 등 즉각 반응</td></tr>
+        <tr><td>인라인 Progress bar</td><td>페이지 상단 얇은 바</td><td>✓ 콘텐츠 유지</td><td>페이지 전환·라우팅</td></tr>
+        <tr><td>버튼 disabled + 텍스트</td><td>Spinner 없이 상태만 표시</td><td>✓ 콘텐츠 유지</td><td>폼 제출 단순 케이스</td></tr>
+        <tr><td>Spinner</td><td>명시적이나 콘텐츠 영역 점유</td><td>✕ 영역 비움</td><td>대안이 불가능한 경우</td></tr>
       </tbody>
     </table>
   </dd>
