@@ -3,6 +3,7 @@ import { parseMarkdown } from './lib/parseMarkdown'
 import { LiveIsland } from './components/LiveIsland'
 
 type ComponentEntry = {
+  slug: string
   name: string
   designHtml: string
   bootstrapCodes: string[]
@@ -39,6 +40,7 @@ async function loadComponent(slug: string): Promise<ComponentEntry> {
     fetchAllIslands(`/catalog/${slug}-shadcn.md`),
   ])
   return {
+    slug,
     name: slug.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
     designHtml,
     bootstrapCodes,
@@ -67,8 +69,8 @@ export default function App() {
       .then((entries) => {
         setComponents(entries)
         const hash = getHash()
-        const match = entries.find((e) => e.name.toLowerCase() === hash.toLowerCase())
-        setSelected(match ? match.name : '')
+        const match = entries.find((e) => e.slug === hash)
+        setSelected(match ? match.slug : '')
       })
   }, [])
 
@@ -76,8 +78,8 @@ export default function App() {
     const onHashChange = () => {
       const hash = getHash()
       setComponents((prev) => {
-        const match = prev.find((e) => e.name.toLowerCase() === hash.toLowerCase())
-        setSelected(match ? match.name : '')
+        const match = prev.find((e) => e.slug === hash)
+        setSelected(match ? match.slug : '')
         return prev
       })
     }
@@ -85,7 +87,7 @@ export default function App() {
     return () => window.removeEventListener('hashchange', onHashChange)
   }, [])
 
-  const current = components.find((c) => c.name === selected)
+  const current = components.find((c) => c.slug === selected)
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh' }}>
@@ -93,10 +95,10 @@ export default function App() {
         <a href="#" className={selected === '' ? 'sidebar-home active' : 'sidebar-home'}>홈</a>
         <ul>
           {components.map((c) => (
-            <li key={c.name}>
+            <li key={c.slug}>
               <a
-                href={`#${c.name.toLowerCase()}`}
-                className={selected === c.name ? 'active' : ''}
+                href={`#${c.slug}`}
+                className={selected === c.slug ? 'active' : ''}
               >
                 {c.name}
               </a>
