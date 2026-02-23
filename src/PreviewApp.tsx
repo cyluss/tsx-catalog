@@ -23,6 +23,33 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { Sheet, SheetTrigger, SheetClose, SheetContent, SheetHeader, SheetFooter, SheetTitle, SheetDescription } from '@/components/ui/sheet'
 import { toast } from 'sonner'
 
+function useScrollSpy({ sectionElementRefs, scrollingElement }: {
+  sectionElementRefs: React.RefObject<HTMLElement | null>[]
+  scrollingElement: React.RefObject<HTMLElement | null>
+}): number {
+  const [activeSection, setActiveSection] = useState(0)
+  useEffect(() => {
+    const container = scrollingElement.current
+    if (!container) return
+    const ratios = new Map<HTMLElement, number>()
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => ratios.set(e.target as HTMLElement, e.intersectionRatio))
+        let bestIdx = 0, bestRatio = -1
+        sectionElementRefs.forEach((ref, i) => {
+          const r = ref.current ? (ratios.get(ref.current) ?? 0) : 0
+          if (r > bestRatio) { bestRatio = r; bestIdx = i }
+        })
+        setActiveSection(bestIdx)
+      },
+      { root: container, threshold: [0, 0.25, 0.5, 0.75, 1] }
+    )
+    sectionElementRefs.forEach((ref) => { if (ref.current) observer.observe(ref.current) })
+    return () => observer.disconnect()
+  }, [])
+  return activeSection
+}
+
 const Shad = {
   Button: ShadButton, Badge: ShadBadge,
   Alert: ShadAlert, AlertTitle, AlertDescription,
@@ -40,7 +67,7 @@ const Shad = {
 }
 
 const scope = {
-  React, Button, Alert, Badge, Spinner, RB, Shad, toast,
+  React, Button, Alert, Badge, Spinner, RB, Shad, toast, useScrollSpy,
 }
 
 export default function PreviewApp() {
