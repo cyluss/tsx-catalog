@@ -63,7 +63,7 @@ export default function App() {
         setComponents(entries)
         const hash = getHash()
         const match = entries.find((e) => e.name.toLowerCase() === hash.toLowerCase())
-        setSelected(match ? match.name : entries[0]?.name ?? '')
+        setSelected(match ? match.name : '')
       })
   }, [])
 
@@ -72,7 +72,7 @@ export default function App() {
       const hash = getHash()
       setComponents((prev) => {
         const match = prev.find((e) => e.name.toLowerCase() === hash.toLowerCase())
-        if (match) setSelected(match.name)
+        setSelected(match ? match.name : '')
         return prev
       })
     }
@@ -85,6 +85,7 @@ export default function App() {
   return (
     <div style={{ display: 'flex', minHeight: '100vh' }}>
       <nav className="sidebar">
+        <a href="#" className={selected === '' ? 'sidebar-home active' : 'sidebar-home'}>홈</a>
         <ul>
           {components.map((c) => (
             <li key={c.name}>
@@ -99,6 +100,15 @@ export default function App() {
         </ul>
       </nav>
       <main className="content">
+        {selected === '' && components.length > 0 && (
+          <div className="toc-grid">
+            {components.map((c) => (
+              <a key={c.name} href={`#${c.name.toLowerCase()}`} className="toc-card">
+                {c.name}
+              </a>
+            ))}
+          </div>
+        )}
         {current && (
           <>
             <h2 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: '0.75rem' }}>
