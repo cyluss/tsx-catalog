@@ -8,6 +8,7 @@ function ProfileForm() {
   const [notifyProduct, setNotifyProduct] = React.useState(false)
   const [error, setError] = React.useState('')
   const [saving, setSaving] = React.useState(false)
+  const [showToast, setShowToast] = React.useState(false)
 
   const handleSave = () => {
     if (!name.trim()) {
@@ -18,7 +19,7 @@ function ProfileForm() {
     setSaving(true)
     setTimeout(() => {
       setSaving(false)
-      toast.success('저장되었습니다.')
+      setShowToast(true)
     }, 800)
   }
 
@@ -74,6 +75,15 @@ function ProfileForm() {
           {saving ? '저장 중...' : '저장'}
         </RB.Button>
       </div>
+
+      <RB.ToastContainer position="bottom-end" className="p-3">
+        <RB.Toast show={showToast} onClose={() => setShowToast(false)} autohide delay={2500} bg="success">
+          <RB.Toast.Header>
+            <strong className="me-auto">알림</strong>
+          </RB.Toast.Header>
+          <RB.Toast.Body className="text-white">저장되었습니다.</RB.Toast.Body>
+        </RB.Toast>
+      </RB.ToastContainer>
     </div>
   )
 }

@@ -15,7 +15,7 @@
 - `<input>`, `<button>`, `<select>` 태그를 직접 사용하지 않는다.
 - `variant="primary"` Button은 화면에 하나만 사용한다.
 - 오류 메시지는 `Alert variant="destructive"` (shadcn) / `Alert variant="danger"` (Bootstrap).
-- 성공 피드백은 `toast.success()`.
+- 성공 피드백: shadcn은 `toast.success()`, Bootstrap은 `RB.Toast` + `setShowToast` state 패턴.
 - Switch는 저장 버튼 없이 즉시 반영.
 - Select는 옵션 5개 이상일 때, 미만이면 Radio.
 
