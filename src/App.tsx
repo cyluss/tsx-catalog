@@ -5,17 +5,17 @@ import { LiveIsland } from './components/LiveIsland'
 type ComponentEntry = {
   name: string
   designHtml: string
-  bootstrapCode: string
-  shadcnCode: string
+  bootstrapCodes: string[]
+  shadcnCodes: string[]
   minHeight?: number
 }
 
-async function fetchFirstIsland(url: string): Promise<string> {
+async function fetchAllIslands(url: string): Promise<string[]> {
   const res = await fetch(url)
-  if (!res.ok) return ''
+  if (!res.ok) return []
   const md = await res.text()
   const { units } = await parseMarkdown(md)
-  return units.find((u) => u.type === 'island')?.code ?? ''
+  return units.filter((u) => u.type === 'island').map((u) => u.code)
 }
 
 async function fetchDesignHtml(slug: string): Promise<string> {
@@ -33,16 +33,16 @@ const MIN_HEIGHTS: Record<string, number> = {
 }
 
 async function loadComponent(slug: string): Promise<ComponentEntry> {
-  const [designHtml, bootstrapCode, shadcnCode] = await Promise.all([
+  const [designHtml, bootstrapCodes, shadcnCodes] = await Promise.all([
     fetchDesignHtml(slug),
-    fetchFirstIsland(`/catalog/${slug}-rb.md`),
-    fetchFirstIsland(`/catalog/${slug}-shadcn.md`),
+    fetchAllIslands(`/catalog/${slug}-rb.md`),
+    fetchAllIslands(`/catalog/${slug}-shadcn.md`),
   ])
   return {
     name: slug.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
     designHtml,
-    bootstrapCode,
-    shadcnCode,
+    bootstrapCodes,
+    shadcnCodes,
     minHeight: MIN_HEIGHTS[slug],
   }
 }
@@ -107,22 +107,26 @@ export default function App() {
             {current.designHtml && (
               <div className="design-body" dangerouslySetInnerHTML={{ __html: current.designHtml }} style={{ marginBottom: '2rem' }} />
             )}
-            <LiveIsland
-              key={`bs-${current.name}`}
-              id={`bs-${current.name}`}
-              code={current.bootstrapCode}
-              title="Bootstrap"
-              theme="bootstrap"
-              minHeight={current.minHeight}
-            />
-            <LiveIsland
-              key={`shadcn-${current.name}`}
-              id={`shadcn-${current.name}`}
-              code={current.shadcnCode}
-              title="shadcn/ui"
-              theme="shadcn"
-              minHeight={current.minHeight}
-            />
+            {current.bootstrapCodes.map((code, i) => (
+              <LiveIsland
+                key={`bs-${current.name}-${i}`}
+                id={`bs-${current.name}-${i}`}
+                code={code}
+                title={i === 0 ? 'Bootstrap' : ''}
+                theme="bootstrap"
+                minHeight={current.minHeight}
+              />
+            ))}
+            {current.shadcnCodes.map((code, i) => (
+              <LiveIsland
+                key={`shadcn-${current.name}-${i}`}
+                id={`shadcn-${current.name}-${i}`}
+                code={code}
+                title={i === 0 ? 'shadcn/ui' : ''}
+                theme="shadcn"
+                minHeight={current.minHeight}
+              />
+            ))}
           </>
         )}
         {components.length === 0 && <div className="loading">로딩 중...</div>}
