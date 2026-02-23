@@ -12,7 +12,7 @@
         <tr><td>Optimistic UI</td><td>성공 가정 후 실패 시 롤백</td><td>✓ 즉시 반영</td><td>좋아요·체크박스 등 즉각 반응</td></tr>
         <tr><td>인라인 Progress bar</td><td>페이지 상단 얇은 바</td><td>✓ 콘텐츠 유지</td><td>페이지 전환·라우팅</td></tr>
         <tr><td>버튼 disabled + 텍스트</td><td>Spinner 없이 상태만 표시</td><td>✓ 콘텐츠 유지</td><td>폼 제출 단순 케이스</td></tr>
-        <tr><td>로컬 오버레이</td><td>콘텐츠 위에 반투명 막 + Spinner</td><td>✓ 콘텐츠 유지 (흐림)</td><td>데이터 갱신·재조회</td></tr>
+        <tr><td>로컬 오버레이</td><td>콘텐츠 위에 반투명 막 + Spinner. 오버레이 외부 인터랙션 유지가 장점. 영역이 구석에 있으면 시선을 끌지 못함</td><td>✓ 콘텐츠 유지 (흐림)</td><td>사용자 시선 안에 있는 주요 영역 갱신</td></tr>
         <tr><td>Spinner</td><td>명시적이나 콘텐츠 영역 점유</td><td>✕ 영역 비움</td><td>초기 로딩 대안이 없는 경우</td></tr>
       </tbody>
     </table>
