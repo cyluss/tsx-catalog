@@ -10,4 +10,6 @@
       <div class="dont"><strong>쓰지 말아야 할 때</strong><p>옵션이 4개 이하 — RadioGroup 사용</p><p>다중 선택 — 별도 컴포넌트 사용</p></div>
     </div>
   </dd>
+  <dt>라우터 구현 권장</dt>
+  <dd>조건부 — 필터·정렬 용도일 때는 <code>?sort=name</code> 형태의 URL 파라미터와 연동한다. 폼 입력 용도일 때는 아니오.</dd>
 </dl>

@@ -10,4 +10,6 @@
       <div class="dont"><strong>쓰지 말아야 할 때</strong><p>옵션이 5개 이상 — Select 사용</p><p>복수 선택 — Checkbox 사용</p></div>
     </div>
   </dd>
+  <dt>라우터 구현 권장</dt>
+  <dd>아니오 — 폼 상태이므로 URL과 무관하다.</dd>
 </dl>

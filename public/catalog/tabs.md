@@ -12,4 +12,6 @@
   </dd>
   <dt>선택 규칙</dt>
   <dd>탭 수는 2–5개가 적당하다. 탭 레이블은 짧게(1–2단어), 아이콘만 단독 사용은 금지한다.</dd>
+  <dt>라우터 구현 권장</dt>
+  <dd>조건부 — 탭이 독립 페이지를 나타낼 때 권장 (<code>/settings/general</code>, <code>/settings/security</code>). 같은 페이지 내 UI 전환이라면 아니오.</dd>
 </dl>

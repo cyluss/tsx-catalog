@@ -10,4 +10,6 @@
       <div class="dont"><strong>쓰지 말아야 할 때</strong><p>단순 텍스트 그룹 — section 태그 사용</p><p>항목이 하나뿐인 목록</p></div>
     </div>
   </dd>
+  <dt>라우터 구현 권장</dt>
+  <dd>조건부 — 카드 전체가 클릭 가능한 링크일 때는 카드를 <code>&lt;a&gt;</code> 또는 라우터 Link로 감싼다.</dd>
 </dl>

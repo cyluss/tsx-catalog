@@ -10,4 +10,6 @@
       <div class="dont"><strong>쓰지 말아야 할 때</strong><p>저장이 필요한 선택 — Checkbox 사용</p><p>여러 항목 중 하나 선택 — Radio 사용</p></div>
     </div>
   </dd>
+  <dt>라우터 구현 권장</dt>
+  <dd>아니오 — 즉시 적용되는 설정이므로 URL과 무관하다.</dd>
 </dl>

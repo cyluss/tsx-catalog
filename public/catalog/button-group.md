@@ -12,4 +12,6 @@
   </dd>
   <dt>선택 규칙</dt>
   <dd>수평이 기본이다. 세로 나열이 필요하면 <code>orientation="vertical"</code>을 사용한다.</dd>
+  <dt>라우터 구현 권장</dt>
+  <dd>조건부 — 페이지네이션 용도일 때는 <code>?page=2</code> 형태의 URL 파라미터와 연동한다. 툴바 액션 용도일 때는 아니오.</dd>
 </dl>

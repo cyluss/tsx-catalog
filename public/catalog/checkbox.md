@@ -10,4 +10,6 @@
       <div class="dont"><strong>쓰지 말아야 할 때</strong><p>단일 선택 — RadioGroup 사용</p><p>켜기/끄기 토글 — Switch 사용</p></div>
     </div>
   </dd>
+  <dt>라우터 구현 권장</dt>
+  <dd>아니오 — 폼 상태이므로 URL과 무관하다.</dd>
 </dl>

@@ -10,4 +10,6 @@
       <div class="dont"><strong>쓰지 말아야 할 때</strong><p>클릭 가능한 필터 — Button 사용</p><p>숫자 카운트 표시 — 별도 컴포넌트 사용</p></div>
     </div>
   </dd>
+  <dt>라우터 구현 권장</dt>
+  <dd>아니오 — 순수 표시 요소이므로 URL과 무관하다.</dd>
 </dl>

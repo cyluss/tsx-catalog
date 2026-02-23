@@ -12,4 +12,6 @@
   </dd>
   <dt>선택 규칙</dt>
   <dd>API 에러는 항상 variant="danger"를 사용한다. 에러 메시지는 error.message를 그대로 표시한다.</dd>
+  <dt>라우터 구현 권장</dt>
+  <dd>아니오 — 인라인 상태 표시이므로 URL과 무관하다.</dd>
 </dl>

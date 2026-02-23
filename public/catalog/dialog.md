@@ -12,4 +12,6 @@
   </dd>
   <dt>선택 규칙</dt>
   <dd>액션 버튼은 Footer에 배치하고, 파괴적 액션(삭제)은 <code>variant="destructive"</code>로 구분한다.</dd>
+  <dt>라우터 구현 권장</dt>
+  <dd>아니오 — 다이얼로그 열림 상태는 UI 상태로 관리한다. URL에 모달 상태를 노출하면 UX가 복잡해진다.</dd>
 </dl>

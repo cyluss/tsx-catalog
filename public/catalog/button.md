@@ -12,4 +12,6 @@
   </dd>
   <dt>선택 규칙</dt>
   <dd>한 화면에 variant="primary"는 하나만 사용한다. 주요 액션이 무엇인지 이슈의 성공 조건에서 판단한다.</dd>
+  <dt>라우터 구현 권장</dt>
+  <dd>아니오 — 페이지 이동은 Button이 아닌 <code>&lt;a&gt;</code> 태그 또는 라우터 Link를 사용한다.</dd>
 </dl>

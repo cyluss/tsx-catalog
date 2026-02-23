@@ -12,4 +12,6 @@
   </dd>
   <dt>선택 규칙</dt>
   <dd>Popover는 클릭으로 열고, Tooltip은 hover로 열린다. 모바일에서는 hover가 없으므로 Tooltip 대신 Popover를 고려한다.</dd>
+  <dt>라우터 구현 권장</dt>
+  <dd>아니오 — 열림 상태는 UI 상태로 관리한다.</dd>
 </dl>
