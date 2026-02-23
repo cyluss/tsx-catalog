@@ -34,3 +34,6 @@ Bootstrap과 shadcn/ui 기반 UI 컴포넌트 모음. 각 컴포넌트는 설계
 | [Badge](#badge) | 상태, 카테고리, 태그 인라인 표시 | ✓ | ✓ | ✓ | ✓ |
 | [Empty State](#empty-state) | 데이터 없음 상태 안내 | ✓ | ✓ | ✓ | ✓ |
 | [Table](#table) | 정렬·선택 가능한 정형 데이터 목록 | ✓ | ✓ | ✓ | ✓ |
+| **예제** | | | | | |
+| [프로필 설정](#example-profile) | Tabs + Field + Switch + Toast 조합 | ✓ | ✓ | ✓ | ✓ |
+| [부서 CRUD](#example-department) | 자기참조 FK 테이블 CRUD, CASCADE 경고 | ✓ | ✓ | ✓ | ✓ |
