@@ -20,6 +20,7 @@ import { ButtonGroup, ButtonGroupSeparator, ButtonGroupText } from '@/components
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from '@/components/ui/dialog'
 import { Popover, PopoverTrigger, PopoverContent, PopoverHeader, PopoverTitle, PopoverDescription } from '@/components/ui/popover'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
+import { toast } from 'sonner'
 
 const Shad = {
   Button: ShadButton, Badge: ShadBadge,
@@ -37,7 +38,7 @@ const Shad = {
 }
 
 const scope = {
-  React, Button, Alert, Badge, Spinner, RB, Shad,
+  React, Button, Alert, Badge, Spinner, RB, Shad, toast,
 }
 
 export default function PreviewApp() {

@@ -29,6 +29,7 @@ async function fetchDesignHtml(slug: string): Promise<string> {
 const MIN_HEIGHTS: Record<string, number> = {
   dialog: 400,
   popover: 400,
+  toast: 300,
 }
 
 async function loadComponent(slug: string): Promise<ComponentEntry> {
