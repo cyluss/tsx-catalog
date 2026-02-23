@@ -19,6 +19,7 @@ import { FieldContent, FieldTitle } from '@/components/ui/field'
 import { ButtonGroup, ButtonGroupSeparator, ButtonGroupText } from '@/components/ui/button-group'
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from '@/components/ui/dialog'
 import { Popover, PopoverTrigger, PopoverContent, PopoverHeader, PopoverTitle, PopoverDescription } from '@/components/ui/popover'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 
 const Shad = {
   Button: ShadButton, Badge: ShadBadge,
@@ -32,6 +33,7 @@ const Shad = {
   ButtonGroup, ButtonGroupSeparator, ButtonGroupText,
   Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose,
   Popover, PopoverTrigger, PopoverContent, PopoverHeader, PopoverTitle, PopoverDescription,
+  Tabs, TabsList, TabsTrigger, TabsContent,
 }
 
 const scope = {
