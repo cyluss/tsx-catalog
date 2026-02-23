@@ -37,3 +37,5 @@ Bootstrap과 shadcn/ui 기반 UI 컴포넌트 모음. 각 컴포넌트는 설계
 ### 데이터 표시
 
 - [Badge](#badge) 상태, 카테고리, 태그 인라인 표시
+- [Empty State](#empty-state) 데이터 없음 상태 안내
+- [Table](#table) 정렬·선택 가능한 정형 데이터 목록
