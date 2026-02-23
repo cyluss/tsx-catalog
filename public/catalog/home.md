@@ -21,6 +21,7 @@ Bootstrap과 shadcn/ui 기반 UI 컴포넌트 모음. 각 컴포넌트는 설계
 ### 피드백
 
 - [Alert](#alert) 시스템 메시지, 에러, 성공 상태 인라인 표시
+- [Spinner](#spinner) 비동기 처리 진행 중 표시
 - [Toast](#toast) 액션 결과를 일시적으로 알리는 알림
 
 ### 레이아웃

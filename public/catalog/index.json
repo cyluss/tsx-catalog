@@ -1,4 +1,4 @@
 {
-  "components": ["alert", "badge", "button", "button-group", "card", "checkbox", "choice-card", "dialog", "empty-state", "field", "popover", "radio", "scroll-spy", "select", "switch", "table", "tabs", "toast"],
+  "components": ["alert", "badge", "button", "button-group", "card", "checkbox", "choice-card", "dialog", "empty-state", "field", "popover", "radio", "scroll-spy", "select", "spinner", "switch", "table", "tabs", "toast"],
   "examples": ["example-profile"]
 }
