@@ -4,6 +4,15 @@ Bootstrap과 shadcn/ui 기반 UI 컴포넌트 모음. 각 컴포넌트는 설계
 
 ## 목차
 
+### 입력
+
+- [Checkbox](#checkbox) 독립적인 다중 선택
+- [Choice Card](#choice-card) 카드 형태의 단일 선택
+- [Field](#field) 텍스트 입력 필드
+- [Radio](#radio) 상호 배타적인 단일 선택
+- [Select](#select) 미리 정의된 옵션 중 하나 선택
+- [Switch](#switch) 즉시 적용되는 on/off 토글
+
 ### 액션
 
 - [Button](#button) 사용자 액션을 트리거하는 인터랙티브 요소
@@ -19,21 +28,12 @@ Bootstrap과 shadcn/ui 기반 UI 컴포넌트 모음. 각 컴포넌트는 설계
 - [Card](#card) 관련 정보를 시각적으로 그룹화하는 컨테이너
 - [Dialog](#dialog) 모달, 시트, 드로어
 
+### 탐색
+
+- [Popover](#popover) 앵커 기반 부가 정보 표시
+- [Scroll Spy](#scroll-spy) 스크롤 위치 기반 내비게이션 동기화
+- [Tabs](#tabs) 동일 수준 콘텐츠 영역 전환
+
 ### 데이터 표시
 
 - [Badge](#badge) 상태, 카테고리, 태그 인라인 표시
-
-### 입력
-
-- [Field](#field) 텍스트 입력 필드
-- [Select](#select) 미리 정의된 옵션 중 하나 선택
-- [Checkbox](#checkbox) 독립적인 다중 선택
-- [Radio](#radio) 상호 배타적인 단일 선택
-- [Switch](#switch) 즉시 적용되는 on/off 토글
-- [Choice Card](#choice-card) 카드 형태의 단일 선택
-
-### 탐색
-
-- [Tabs](#tabs) 동일 수준 콘텐츠 영역 전환
-- [Popover](#popover) 앵커 기반 부가 정보 표시
-- [Scroll Spy](#scroll-spy) 스크롤 위치 기반 내비게이션 동기화
