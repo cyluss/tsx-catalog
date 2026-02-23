@@ -27,6 +27,7 @@ Bootstrap과 shadcn/ui 기반 UI 컴포넌트 모음. 각 컴포넌트는 설계
 
 ### 레이아웃
 
+- [Accordion](#accordion) 항목을 접어 공간을 절약하는 수직 목록
 - [Card](#card) 관련 정보를 시각적으로 그룹화하는 컨테이너
 - [Dialog](#dialog) 모달, 시트, 드로어
 
