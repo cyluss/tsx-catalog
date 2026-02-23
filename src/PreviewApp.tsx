@@ -8,12 +8,24 @@ import { Badge as ShadBadge } from '@/components/ui/badge'
 import { Alert as ShadAlert, AlertTitle, AlertDescription } from '@/components/ui/alert'
 import { Card as ShadCard, CardHeader, CardTitle, CardDescription, CardAction, CardContent, CardFooter } from '@/components/ui/card'
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion'
+import { Field, FieldLabel, FieldDescription, FieldError, FieldGroup } from '@/components/ui/field'
+import { Input } from '@/components/ui/input'
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select'
+import { Checkbox } from '@/components/ui/checkbox'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { Label } from '@/components/ui/label'
+import { Switch } from '@/components/ui/switch'
+import { FieldContent, FieldTitle } from '@/components/ui/field'
 
 const Shad = {
   Button: ShadButton, Badge: ShadBadge,
   Alert: ShadAlert, AlertTitle, AlertDescription,
   Card: ShadCard, CardHeader, CardTitle, CardDescription, CardAction, CardContent, CardFooter,
   Accordion, AccordionItem, AccordionTrigger, AccordionContent,
+  Field, FieldLabel, FieldDescription, FieldError, FieldGroup, FieldContent, FieldTitle, Input,
+  Select, SelectTrigger, SelectValue, SelectContent, SelectItem,
+  Checkbox, RadioGroup, RadioGroupItem, Label,
+  Switch,
 }
 
 const scope = {

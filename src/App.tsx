@@ -39,9 +39,13 @@ async function loadComponent(slug: string): Promise<ComponentEntry> {
   }
 }
 
+function getHash() {
+  return decodeURIComponent(location.hash.slice(1))
+}
+
 export default function App() {
   const [components, setComponents] = useState<ComponentEntry[]>([])
-  const [selected, setSelected] = useState<string>('')
+  const [selected, setSelected] = useState<string>(getHash)
 
   useEffect(() => {
     fetch('/catalog/index.json')
@@ -49,8 +53,23 @@ export default function App() {
       .then((slugs: string[]) => Promise.all(slugs.map(loadComponent)))
       .then((entries) => {
         setComponents(entries)
-        if (entries.length > 0) setSelected(entries[0].name)
+        const hash = getHash()
+        const match = entries.find((e) => e.name.toLowerCase() === hash.toLowerCase())
+        setSelected(match ? match.name : entries[0]?.name ?? '')
       })
+  }, [])
+
+  useEffect(() => {
+    const onHashChange = () => {
+      const hash = getHash()
+      setComponents((prev) => {
+        const match = prev.find((e) => e.name.toLowerCase() === hash.toLowerCase())
+        if (match) setSelected(match.name)
+        return prev
+      })
+    }
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
   }, [])
 
   const current = components.find((c) => c.name === selected)
@@ -62,9 +81,8 @@ export default function App() {
           {components.map((c) => (
             <li key={c.name}>
               <a
-                href="#"
+                href={`#${c.name.toLowerCase()}`}
                 className={selected === c.name ? 'active' : ''}
-                onClick={(e) => { e.preventDefault(); setSelected(c.name) }}
               >
                 {c.name}
               </a>
