@@ -22,6 +22,7 @@ import { Popover, PopoverTrigger, PopoverContent, PopoverHeader, PopoverTitle, P
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { Sheet, SheetTrigger, SheetClose, SheetContent, SheetHeader, SheetFooter, SheetTitle, SheetDescription } from '@/components/ui/sheet'
 import { Spinner as ShadSpinner } from '@/components/ui/spinner'
+import { Textarea as ShadTextarea } from '@/components/ui/textarea'
 import { Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption } from '@/components/ui/table'
 import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent, EmptyMedia } from '@/components/ui/empty'
 import { toast } from 'sonner'
@@ -68,6 +69,7 @@ const Shad = {
   Tabs, TabsList, TabsTrigger, TabsContent,
   Sheet, SheetTrigger, SheetClose, SheetContent, SheetHeader, SheetFooter, SheetTitle, SheetDescription,
   Spinner: ShadSpinner,
+  Textarea: ShadTextarea,
   Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption,
   Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent, EmptyMedia,
 }

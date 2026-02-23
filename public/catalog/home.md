@@ -9,6 +9,7 @@ Bootstrap과 shadcn/ui 기반 UI 컴포넌트 모음. 각 컴포넌트는 설계
 - [Checkbox](#checkbox) 독립적인 다중 선택
 - [Choice Card](#choice-card) 카드 형태의 단일 선택
 - [Field](#field) 텍스트 입력 필드
+- [Textarea](#textarea) 여러 줄 텍스트 입력
 - [Radio](#radio) 상호 배타적인 단일 선택
 - [Select](#select) 미리 정의된 옵션 중 하나 선택
 - [Switch](#switch) 즉시 적용되는 on/off 토글
